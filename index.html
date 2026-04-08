@@ -32,7 +32,6 @@
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='18'%3E🐾%3C/text%3E%3C/svg%3E") 12 12, auto;
   }
 
-  /* Floating bg blobs */
   .bg-blobs {
     position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
   }
@@ -52,7 +51,6 @@
     66% { transform: translate(-10px,10px) scale(0.97); }
   }
 
-  /* HEADER */
   header {
     position: relative; z-index: 10;
     background: var(--pink);
@@ -92,7 +90,6 @@
   }
   .header-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 16px rgba(0,0,0,0.18); }
 
-  /* NAV TABS */
   .nav-tabs {
     position: relative; z-index: 10;
     display: flex; justify-content: center; gap: 0;
@@ -112,7 +109,6 @@
   .nav-tab.active { color: var(--cream); border-bottom-color: var(--cream); }
   .nav-tab:hover { color: white; }
 
-  /* MAIN LAYOUT */
   main {
     position: relative; z-index: 5;
     max-width: 1100px; margin: 0 auto;
@@ -121,7 +117,6 @@
     align-items: start;
   }
 
-  /* CARD STACK */
   .card-section { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 
   .catchphrase {
@@ -212,7 +207,6 @@
     font-size: 13px; color: #666; line-height: 1.5;
   }
 
-  /* SWIPE LIKE/NOPE overlays */
   .swipe-label {
     position: absolute; top: 28px;
     padding: 8px 20px; border-radius: 12px;
@@ -223,7 +217,6 @@
   .swipe-like { left: 24px; color: #2ecc71; border-color: #2ecc71; transform: rotate(-15deg); }
   .swipe-nope { right: 24px; color: #ff0000; border-color: rgb(231, 60, 60); transform: rotate(15deg); }
 
-  /* ACTION BUTTONS */
   .action-buttons {
     display: flex; align-items: center; gap: 14px;
     margin-top: 4px;
@@ -241,14 +234,12 @@
   .btn-like { width: 60px; height: 60px; background: white; box-shadow: 0 4px 16px rgba(46,204,113,0.3); border: 2.5px solid #a8edbd; }
   .btn-boost { width: 44px; height: 44px; background: white; box-shadow: 0 4px 16px rgba(201,184,245,0.5); border: 2.5px solid var(--lavender); font-size: 18px; }
 
-  /* HINT text */
   .swipe-hint {
     font-size: 12px; color: #bbb; font-weight: 600; text-align: center;
     display: flex; gap: 20px;
   }
   .swipe-hint span { display: flex; align-items: center; gap: 4px; }
 
-  /* SIDEBAR */
   .sidebar { display: flex; flex-direction: column; gap: 20px; }
 
   .sidebar-card {
@@ -262,7 +253,6 @@
     margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
   }
 
-  /* MATCHES */
   .matches-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
   }
@@ -287,7 +277,6 @@
   }
   .match-name { font-size: 11px; font-weight: 700; color: #555; }
 
-  /* NEARBY SHELTERS */
   .shelter-item {
     display: flex; align-items: center; gap: 12px;
     padding: 10px 0; border-bottom: 1.5px dashed var(--light-pink);
@@ -307,7 +296,6 @@
     padding: 3px 9px; border-radius: 12px;
   }
 
-  /* FILTERS */
   .filter-row {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 10px;
@@ -331,7 +319,6 @@
   }
   .filter-chip:hover { border-color: var(--pink); color: var(--pink); }
 
-  /* STATS BAR */
   .stats-bar {
     position: relative; z-index: 10;
     background: white; border-top: 2px solid var(--light-pink);
@@ -348,7 +335,6 @@
   }
   .stat-label { font-size: 11px; font-weight: 700; color: #aaa; }
 
-  /* FLOATING DECO */
   .deco { position: fixed; pointer-events: none; z-index: 3; font-size: 22px; animation: floatDeco 6s ease-in-out infinite; opacity: 0.55; }
   .deco:nth-child(1) { top: 18%; left: 3%; animation-delay: 0s; }
   .deco:nth-child(2) { top: 45%; left: 96%; animation-delay: 1.5s; font-size: 18px; }
@@ -361,7 +347,6 @@
     50% { transform: translateY(-14px) rotate(8deg); }
   }
 
-  /* MATCH POPUP */
   .match-popup {
     display: none;
     position: fixed; inset: 0; z-index: 100;
@@ -398,7 +383,6 @@
   .popup-btn-primary { background: linear-gradient(135deg, var(--pink), var(--coral)); color: white; }
   .popup-btn-secondary { background: var(--soft-pink); color: var(--hot-pink); }
 
-  /* HEARTS RAIN */
   .hearts-container { position: fixed; inset: 0; pointer-events: none; z-index: 99; overflow: hidden; }
   .falling-heart {
     position: absolute; top: -30px; font-size: 20px;
@@ -409,7 +393,6 @@
     to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 
-  /* PAWS TRAIL */
   .paw-trail {
     position: fixed; pointer-events: none; z-index: 200;
     font-size: 18px; opacity: 0.7;
@@ -417,12 +400,10 @@
   }
   @keyframes pawFade { to { opacity: 0; transform: translateY(-20px) scale(0.5); } }
 
-  /* SCROLLBAR */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--soft-pink); }
   ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
 
-  /* No more cats */
   .no-more-cats {
     width: 340px; height: 480px;
     background: white; border-radius: 28px;
@@ -453,13 +434,11 @@
 </head>
 <body>
 
-<!-- Background blobs -->
 <div class="bg-blobs">
   <div class="blob"></div><div class="blob"></div><div class="blob"></div>
   <div class="blob"></div><div class="blob"></div>
 </div>
 
-<!-- Floating decorations -->
 <div class="deco">ᓚᘏᗢ</div>
 <div class="deco">✿</div>
 <div class="deco">★</div>
@@ -467,10 +446,8 @@
 <div class="deco">୨ৎ</div>
 <div class="deco">❤︎⁠</div>
 
-<!-- Hearts rain container -->
 <div class="hearts-container" id="heartsContainer"></div>
 
-<!-- MATCH POPUP -->
 <div class="match-popup" id="matchPopup">
   <div class="match-popup-inner">
     <span class="match-popup-emoji">ᓚᘏᗢ</span>
@@ -481,7 +458,6 @@
   </div>
 </div>
 
-<!-- HEADER -->
 <header>
   <div class="logo-area">
     <span class="logo-icon">ᓚᘏᗢ</span>
@@ -494,7 +470,6 @@
   </div>
 </header>
 
-<!-- NAV TABS -->
 <div class="nav-tabs">
   <button class="nav-tab active">₍^. .^₎⟆ Discover</button>
   <button class="nav-tab">♡⁀➴♡ Matches</button>
@@ -502,7 +477,6 @@
   <button class="nav-tab">❤︎⁠ Liked</button>
 </div>
 
-<!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item"><span class="stat-num">1,284</span><span class="stat-label">⚞ • ⚟ AVAILABLE CATS</span></div>
   <div class="stat-item"><span class="stat-num">342</span><span class="stat-label">♡⁀➴♡ MATCHES TODAY</span></div>
@@ -510,15 +484,12 @@
   <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">⚲ NEARBY SHELTERS</span></div>
 </div>
 
-<!-- MAIN -->
 <main>
-  <!-- LEFT: CARD STACK -->
   <div class="card-section">
     <div class="catchphrase">♡⁀➴♡ swipe through adoptable cats, match with your favorite, and give them a forever home 🏠</div>
 
     <div class="card-stack" id="cardStack">
 
-      <!-- BACK CARDS (decorative) -->
       <div class="cat-card back-card-2" id="backCard2">
         <div class="cat-card-emoji-img" style="background: linear-gradient(135deg, #FDE8EF, #FAC0D2);">🐱</div>
         <div class="card-info">
@@ -536,7 +507,6 @@
         </div>
       </div>
 
-      <!-- FRONT CARD -->
       <div class="cat-card front-card" id="frontCard">
         <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
         <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
@@ -551,7 +521,6 @@
           <div class="card-bio" id="cardBio">Hi! I'm Mochi, a cuddle expert and professional nap companion. I love belly rubs and watching birds from the window. Will you be my forever human? 🐾</div>
         </div>
       </div>
-      <!-- No more cats -->
       <div class="no-more-cats" id="noMoreCats">
         <div class="big-emoji">😿</div>
         <h3>You've seen them all!</h3>
@@ -560,7 +529,6 @@
       </div>
     </div>
 
-    <!-- ACTION BUTTONS -->
     <div class="action-buttons">
       <button class="action-btn btn-boost" onclick="boostCard()" title="Boost">⚡</button>
       <button class="action-btn btn-nope" onclick="swipeLeft()" title="Pass">❌</button>
@@ -576,10 +544,8 @@
     </div>
   </div>
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
 
-    <!-- FILTERS -->
     <div class="sidebar-card">
       <h3>🎛️ Filters</h3>
       <div class="filter-row">
@@ -603,7 +569,6 @@
       </div>
     </div>
 
-    <!-- MATCHES -->
     <div class="sidebar-card">
       <h3>♡⁀➴♡ Recent Matches</h3>
       <div class="matches-grid" id="matchesGrid">
@@ -634,7 +599,6 @@
       </div>
     </div>
 
-    <!-- SHELTERS -->
     <div class="sidebar-card">
       <h3>📍 Nearby Shelters</h3>
       <div class="shelter-item">
@@ -663,7 +627,6 @@
       </div>
     </div>
 
-    <!-- TIP -->
     <div class="sidebar-card" style="background: linear-gradient(135deg, var(--cream), var(--soft-pink)); border-color: var(--cream);">
       <h3 style="color: #b8860b;">💡 Adoption Tip</h3>
       <p style="font-size:13px;color:#7a6a00;font-weight:600;line-height:1.6;">Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! They're usually already trained and love to cuddle. 🐾</p>
@@ -710,7 +673,7 @@ function loadCard(index) {
   cat.traits.forEach(([t, c]) => {
     traitsEl.innerHTML += `<span class="trait trait-${c}">${t}</span>`;
   });
-  // Reset overlays
+
   document.getElementById('swipeLike').style.opacity = 0;
   document.getElementById('swipeNope').style.opacity = 0;
   frontCard.style.transform = '';
@@ -758,7 +721,6 @@ function resetCats() {
 }
 function toggleChip(el) { el.classList.toggle('active'); }
 
-// DRAG-TO-SWIPE
 const frontCard = document.getElementById('frontCard');
 frontCard.addEventListener('mousedown', startDrag);
 frontCard.addEventListener('touchstart', e => startDrag(e.touches[0]), { passive: true });
@@ -821,7 +783,6 @@ function spawnHearts() {
   }
 }
 
-// PAW TRAIL on cursor
 document.addEventListener('mousemove', (e) => {
   if (Math.random() > 0.97) {
     const p = document.createElement('span');
@@ -834,14 +795,12 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
-// KEYBOARD SHORTCUTS
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') swipeRight();
   else if (e.key === 'ArrowLeft') swipeLeft();
   else if (e.key === 'ArrowUp') superLike();
 });
 
-// Initial load
 loadCard(0);
 </script>
 </body>
