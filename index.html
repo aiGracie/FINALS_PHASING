@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meowtch 🐾</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FFCFD2;
+    --hot-pink: #d68aa4;
+    --light-pink: #F2AFBC;
+    --soft-pink: #FDE8EF;
+    --cream: #FBF8CC;
+    --pale-yellow: #FFF9CC;
+    --sky-blue: #A8E4F5;
+    --blue-outline: #0ed0ff;
+    --mint: #A8EDCC;
+    --lavender: #C9B8F5;
+    --peach: #ffb2b2;
+    --coral: #ffddbb;
+    --white: #FFFDF5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--soft-pink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='18'%3E🐾%3C/text%3E%3C/svg%3E") 12 12, auto;
+  }
+
+  /* Floating bg blobs */
+  .bg-blobs {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.35;
+    animation: blobFloat 8s ease-in-out infinite;
+  }
+  .blob:nth-child(1) { width:320px;height:320px;background:var(--cream);top:-60px;left:-80px;animation-delay:0s; }
+  .blob:nth-child(2) { width:250px;height:250px;background:var(--sky-blue);top:30%;right:-60px;animation-delay:2s; }
+  .blob:nth-child(3) { width:200px;height:200px;background:var(--lavender);bottom:10%;left:10%;animation-delay:4s; }
+  .blob:nth-child(4) { width:280px;height:280px;background:var(--peach);bottom:-40px;right:20%;animation-delay:1s; }
+  .blob:nth-child(5) { width:180px;height:180px;background:var(--mint);top:60%;left:50%;animation-delay:3s; }
+
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(15px,-20px) scale(1.05); }
+    66% { transform: translate(-10px,10px) scale(0.97); }
+  }
+
+  /* HEADER */
+  header {
+    position: relative; z-index: 10;
+    background: var(--pink);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(243, 134, 167, 0.4);
+    border-bottom: 3px solid var(--hot-pink);
+  }
+  .logo-area {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-icon {
+    font-size: 32px; animation: wiggle 2s ease-in-out infinite;
+  }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+  }
+  .logo-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: 28px; color: var(--cream);
+    text-shadow: 3px 3px 0 var(--hot-pink), -1px -1px 0 var(--blue-outline);
+    letter-spacing: 1px;
+  }
+  .header-icons {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .header-btn {
+    background: var(--cream); border: none;
+    border-radius: 50px; padding: 8px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 13px;
+    color: var(--hot-pink); cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  .header-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 16px rgba(0,0,0,0.18); }
+
+  /* NAV TABS */
+  .nav-tabs {
+    position: relative; z-index: 10;
+    display: flex; justify-content: center; gap: 0;
+    background: var(--hot-pink);
+    padding: 0 24px;
+  }
+  .nav-tab {
+    padding: 10px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer; border: none; background: none;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-tab.active { color: var(--cream); border-bottom-color: var(--cream); }
+  .nav-tab:hover { color: white; }
+
+  /* MAIN LAYOUT */
+  main {
+    position: relative; z-index: 5;
+    max-width: 1100px; margin: 0 auto;
+    padding: 28px 20px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 28px;
+    align-items: start;
+  }
+
+  /* CARD STACK */
+  .card-section { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+  .catchphrase {
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px; color: var(--hot-pink);
+    background: var(--cream); border-radius: 50px;
+    padding: 8px 20px;
+    border: 2px dashed var(--pink);
+    animation: float 3s ease-in-out infinite;
+    max-width: 400px;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .card-stack {
+    position: relative; width: 340px; height: 480px;
+  }
+  .cat-card {
+    position: absolute; inset: 0;
+    background: var(--white); border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(244,114,154,0.3), 0 4px 12px rgba(0,0,0,0.1);
+    border: 3px solid white;
+    transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275), opacity 0.3s;
+    cursor: grab;
+    user-select: none;
+  }
+  .cat-card:active { cursor: grabbing; }
+  .cat-card.back-card-1 {
+    transform: rotate(-4deg) translateY(8px) scale(0.96);
+    z-index: 1;
+  }
+  .cat-card.back-card-2 {
+    transform: rotate(3deg) translateY(14px) scale(0.92);
+    z-index: 0;
+  }
+  .cat-card.front-card { z-index: 2; transform: rotate(0deg); }
+  .cat-card.swiping-left { transform: translateX(-120%) rotate(-20deg) !important; opacity: 0; transition: transform 0.45s ease, opacity 0.45s ease; }
+  .cat-card.swiping-right { transform: translateX(120%) rotate(20deg) !important; opacity: 0; transition: transform 0.45s ease, opacity 0.45s ease; }
+
+  .cat-card img {
+    width: 100%; height: 280px; object-fit: cover; display: block;
+  }
+  .cat-card-emoji-img {
+    width: 100%; height: 280px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 120px;
+  }
+
+  .card-info {
+    padding: 16px 20px;
+  }
+  .card-name-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .card-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 26px; color: #333;
+  }
+  .card-age {
+    background: var(--lavender);
+    color: #e3c7ff; font-weight: 800; font-size: 13px;
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .card-breed {
+    font-size: 13px; color: #999; font-weight: 600; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .card-traits {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+  }
+  .trait {
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 12px; font-weight: 700;
+  }
+  .trait-pink { background: var(--light-pink); color: var(--hot-pink); }
+  .trait-blue { background: var(--sky-blue); color: #D4f2f0; }
+  .trait-yellow { background: var(--cream); color: #EBC6B7; }
+  .trait-mint { background: var(--mint); color: #A1CACF; }
+  .trait-lavender { background: var(--lavender); color: #f28DCE; }
+  .trait-peach { background: var(--peach); color: #F9c58d; }
+
+  .card-bio {
+    font-size: 13px; color: #666; line-height: 1.5;
+  }
+
+  /* SWIPE LIKE/NOPE overlays */
+  .swipe-label {
+    position: absolute; top: 28px;
+    padding: 8px 20px; border-radius: 12px;
+    font-family: 'Fredoka One', cursive; font-size: 28px;
+    border: 4px solid; opacity: 0; transition: opacity 0.15s;
+    pointer-events: none; z-index: 20;
+  }
+  .swipe-like { left: 24px; color: #2ecc71; border-color: #2ecc71; transform: rotate(-15deg); }
+  .swipe-nope { right: 24px; color: #ff0000; border-color: rgb(231, 60, 60); transform: rotate(15deg); }
+
+  /* ACTION BUTTONS */
+  .action-buttons {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 4px;
+  }
+  .action-btn {
+    border: none; cursor: pointer;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.2s;
+    font-size: 22px;
+  }
+  .action-btn:hover { transform: scale(1.18); }
+  .action-btn:active { transform: scale(0.92); }
+  .btn-nope { width: 60px; height: 60px; background: white; box-shadow: 0 4px 16px rgba(231,76,60,0.3); border: 2.5px solid #f8b4ae; }
+  .btn-super { width: 52px; height: 52px; background: white; box-shadow: 0 4px 16px rgba(107,188,212,0.4); border: 2.5px solid var(--sky-blue); }
+  .btn-like { width: 60px; height: 60px; background: white; box-shadow: 0 4px 16px rgba(46,204,113,0.3); border: 2.5px solid #a8edbd; }
+  .btn-boost { width: 44px; height: 44px; background: white; box-shadow: 0 4px 16px rgba(201,184,245,0.5); border: 2.5px solid var(--lavender); font-size: 18px; }
+
+  /* HINT text */
+  .swipe-hint {
+    font-size: 12px; color: #bbb; font-weight: 600; text-align: center;
+    display: flex; gap: 20px;
+  }
+  .swipe-hint span { display: flex; align-items: center; gap: 4px; }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  .sidebar-card {
+    background: white; border-radius: 24px;
+    padding: 20px; border: 2.5px solid var(--light-pink);
+    box-shadow: 0 6px 24px rgba(244,114,154,0.12);
+  }
+  .sidebar-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px; color: var(--hot-pink);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* MATCHES */
+  .matches-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .match-bubble {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    cursor: pointer; transition: transform 0.2s;
+  }
+  .match-bubble:hover { transform: scale(1.08); }
+  .match-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; border: 3px solid;
+    position: relative; overflow: hidden;
+  }
+  .match-new-badge {
+    position: absolute; top: -2px; right: -2px;
+    background: var(--hot-pink); color: white;
+    font-size: 9px; font-weight: 800;
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid white;
+  }
+  .match-name { font-size: 11px; font-weight: 700; color: #555; }
+
+  /* NEARBY SHELTERS */
+  .shelter-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1.5px dashed var(--light-pink);
+  }
+  .shelter-item:last-child { border-bottom: none; }
+  .shelter-icon {
+    width: 42px; height: 42px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .shelter-info { flex: 1; }
+  .shelter-name { font-weight: 800; font-size: 13px; color: #444; }
+  .shelter-dist { font-size: 11px; color: #aaa; font-weight: 600; }
+  .shelter-count {
+    background: var(--cream); color: #7a6a00;
+    font-size: 11px; font-weight: 800;
+    padding: 3px 9px; border-radius: 12px;
+  }
+
+  /* FILTERS */
+  .filter-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .filter-label { font-size: 13px; font-weight: 700; color: #666; }
+  .filter-val { font-size: 13px; font-weight: 800; color: var(--hot-pink); }
+  input[type=range] {
+    width: 100%; accent-color: var(--pink); height: 4px;
+    background: var(--light-pink); border-radius: 4px; outline: none;
+    cursor: pointer; margin-bottom: 14px;
+  }
+  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-chip {
+    padding: 5px 13px; border-radius: 20px;
+    border: 2px solid var(--light-pink); background: white;
+    font-size: 12px; font-weight: 700; color: #999;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .filter-chip.active {
+    background: var(--pink); border-color: var(--pink); color: white;
+  }
+  .filter-chip:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* STATS BAR */
+  .stats-bar {
+    position: relative; z-index: 10;
+    background: white; border-top: 2px solid var(--light-pink);
+    padding: 10px 24px;
+    display: flex; justify-content: center; gap: 40px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .stat-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px; color: var(--hot-pink);
+  }
+  .stat-label { font-size: 11px; font-weight: 700; color: #aaa; }
+
+  /* FLOATING DECO */
+  .deco { position: fixed; pointer-events: none; z-index: 3; font-size: 22px; animation: floatDeco 6s ease-in-out infinite; opacity: 0.55; }
+  .deco:nth-child(1) { top: 18%; left: 3%; animation-delay: 0s; }
+  .deco:nth-child(2) { top: 45%; left: 96%; animation-delay: 1.5s; font-size: 18px; }
+  .deco:nth-child(3) { top: 72%; left: 2%; animation-delay: 3s; font-size: 16px; }
+  .deco:nth-child(4) { top: 85%; left: 90%; animation-delay: 0.8s; font-size: 20px; }
+  .deco:nth-child(5) { top: 8%; left: 75%; animation-delay: 2s; font-size: 14px; }
+  .deco:nth-child(6) { top: 30%; left: 0.5%; animation-delay: 4s; font-size: 18px; }
+  @keyframes floatDeco {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(8deg); }
+  }
+
+  /* MATCH POPUP */
+  .match-popup {
+    display: none;
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(248, 155, 183, 0.6); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .match-popup.show { display: flex; }
+  .match-popup-inner {
+    background: white; border-radius: 32px;
+    padding: 36px 40px; text-align: center;
+    max-width: 340px; width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    border: 4px solid var(--cream);
+    animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .match-popup-emoji { font-size: 80px; margin-bottom: 8px; display: block; animation: bounce 0.8s ease-in-out infinite alternate; }
+  @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+  .match-popup h2 {
+    font-family: 'Fredoka One', cursive; font-size: 32px;
+    color: var(--hot-pink); margin-bottom: 6px;
+  }
+  .match-popup p { font-size: 14px; color: #888; margin-bottom: 20px; font-weight: 600; }
+  .popup-btn {
+    width: 100%; padding: 14px;
+    border-radius: 50px; border: none; cursor: pointer;
+    font-family: 'Fredoka One', cursive; font-size: 17px;
+    margin-bottom: 10px; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .popup-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+  .popup-btn-primary { background: linear-gradient(135deg, var(--pink), var(--coral)); color: white; }
+  .popup-btn-secondary { background: var(--soft-pink); color: var(--hot-pink); }
+
+  /* HEARTS RAIN */
+  .hearts-container { position: fixed; inset: 0; pointer-events: none; z-index: 99; overflow: hidden; }
+  .falling-heart {
+    position: absolute; top: -30px; font-size: 20px;
+    animation: fall 1.5s linear forwards;
+    opacity: 0.9;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* PAWS TRAIL */
+  .paw-trail {
+    position: fixed; pointer-events: none; z-index: 200;
+    font-size: 18px; opacity: 0.7;
+    animation: pawFade 1s ease-out forwards;
+  }
+  @keyframes pawFade { to { opacity: 0; transform: translateY(-20px) scale(0.5); } }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--soft-pink); }
+  ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
+
+  /* No more cats */
+  .no-more-cats {
+    width: 340px; height: 480px;
+    background: white; border-radius: 28px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; border: 3px dashed var(--light-pink);
+    box-shadow: 0 8px 24px rgba(244,114,154,0.15);
+    display: none;
+  }
+  .no-more-cats.show { display: flex; }
+  .no-more-cats .big-emoji { font-size: 64px; animation: wiggle 1.5s ease-in-out infinite; }
+  .no-more-cats h3 { font-family: 'Fredoka One',cursive; font-size: 22px; color: var(--hot-pink); }
+  .no-more-cats p { font-size: 13px; color: #aaa; text-align: center; padding: 0 20px; font-weight: 600; }
+  .refresh-btn {
+    background: var(--pink); color: white;
+    border: none; border-radius: 50px; padding: 12px 28px;
+    font-family: 'Fredoka One',cursive; font-size: 16px;
+    cursor: pointer; transition: transform 0.2s;
+    margin-top: 6px;
+  }
+  .refresh-btn:hover { transform: scale(1.06); }
+
+  @media (max-width: 750px) {
+    main { grid-template-columns: 1fr; }
+    .card-stack { width: 300px; height: 440px; }
+    .sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background blobs -->
+<div class="bg-blobs">
+  <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+  <div class="blob"></div><div class="blob"></div>
+</div>
+
+<!-- Floating decorations -->
+<div class="deco">ᓚᘏᗢ</div>
+<div class="deco">✿</div>
+<div class="deco">★</div>
+<div class="deco">♪</div>
+<div class="deco">୨ৎ</div>
+<div class="deco">❤︎⁠</div>
+
+<!-- Hearts rain container -->
+<div class="hearts-container" id="heartsContainer"></div>
+
+<!-- MATCH POPUP -->
+<div class="match-popup" id="matchPopup">
+  <div class="match-popup-inner">
+    <span class="match-popup-emoji">ᓚᘏᗢ</span>
+    <h2>It's a Meowtch!</h2>
+    <p id="matchPopupText">You and Mochi could be a perfect pair!</p>
+    <button class="popup-btn popup-btn-primary" onclick="closePopup()">✉ Send a Message</button>
+    <button class="popup-btn popup-btn-secondary" onclick="closePopup()">Keep Swiping </button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <span class="logo-icon">ᓚᘏᗢ</span>
+    <span class="logo-text">Meowtch</span>
+  </div>
+  <div class="header-icons">
+    <button class="header-btn">✉ <span>Messages</span></button>
+    <button class="header-btn">ᓚᘏᗢ <span>My Matches</span></button>
+    <button class="header-btn">⚙️</button>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="nav-tab active">₍^. .^₎⟆ Discover</button>
+  <button class="nav-tab">♡⁀➴♡ Matches</button>
+  <button class="nav-tab">⚲ Nearby</button>
+  <button class="nav-tab">❤︎⁠ Liked</button>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">1,284</span><span class="stat-label">⚞ • ⚟ AVAILABLE CATS</span></div>
+  <div class="stat-item"><span class="stat-num">342</span><span class="stat-label">♡⁀➴♡ MATCHES TODAY</span></div>
+  <div class="stat-item"><span class="stat-num">56</span><span class="stat-label">🏠︎ ADOPTED THIS WEEK</span></div>
+  <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">⚲ NEARBY SHELTERS</span></div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <!-- LEFT: CARD STACK -->
+  <div class="card-section">
+    <div class="catchphrase">♡⁀➴♡ swipe through adoptable cats, match with your favorite, and give them a forever home 🏠</div>
+
+    <div class="card-stack" id="cardStack">
+
+      <!-- BACK CARDS (decorative) -->
+      <div class="cat-card back-card-2" id="backCard2">
+        <div class="cat-card-emoji-img" style="background: linear-gradient(135deg, #FDE8EF, #FAC0D2);">🐱</div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">?</span>
+          </div>
+        </div>
+      </div>
+      <div class="cat-card back-card-1" id="backCard1">
+        <div class="cat-card-emoji-img" style="background: linear-gradient(135deg, #F5EFA6, #FDE8EF);">🐈</div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRONT CARD -->
+      <div class="cat-card front-card" id="frontCard">
+        <div class="swipe-label swipe-like" id="swipeLike">ADOPT! 💚</div>
+        <div class="swipe-label swipe-nope" id="swipeNope">PASS 💔</div>
+        <div class="cat-card-emoji-img" id="cardImg" style="background: linear-gradient(135deg, #A8E4F5, #C9B8F5);">🐱</div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name" id="cardName">Mochi</span>
+            <span class="card-age" id="cardAge">2 yrs</span>
+          </div>
+          <div class="card-breed" id="cardBreed">⚲ Baguio City • Scottish Fold Mix</div>
+          <div class="card-traits" id="cardTraits"></div>
+          <div class="card-bio" id="cardBio">Hi! I'm Mochi, a cuddle expert and professional nap companion. I love belly rubs and watching birds from the window. Will you be my forever human? 🐾</div>
+        </div>
+      </div>
+      <!-- No more cats -->
+      <div class="no-more-cats" id="noMoreCats">
+        <div class="big-emoji">😿</div>
+        <h3>You've seen them all!</h3>
+        <p>Check back soon — new cats are added every day. Or expand your search area!</p>
+        <button class="refresh-btn" onclick="resetCats()">🔄 Refresh Cats</button>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-buttons">
+      <button class="action-btn btn-boost" onclick="boostCard()" title="Boost">⚡</button>
+      <button class="action-btn btn-nope" onclick="swipeLeft()" title="Pass">❌</button>
+      <button class="action-btn btn-super" onclick="superLike()" title="Super Like">⭐</button>
+      <button class="action-btn btn-like" onclick="swipeRight()" title="Adopt">💚</button>
+      <button class="action-btn btn-boost" onclick="undoSwipe()" title="Undo">↩️</button>
+    </div>
+
+    <div class="swipe-hint">
+      <span>👈 Pass</span>
+      <span>⭐ Super Like</span>
+      <span>💚 Adopt 👉</span>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- FILTERS -->
+    <div class="sidebar-card">
+      <h3>🎛️ Filters</h3>
+      <div class="filter-row">
+        <span class="filter-label">Age</span>
+        <span class="filter-val" id="ageVal">0–5 yrs</span>
+      </div>
+      <input type="range" min="0" max="15" value="5" oninput="document.getElementById('ageVal').textContent='0–'+this.value+' yrs'">
+      <div class="filter-row">
+        <span class="filter-label">Distance</span>
+        <span class="filter-val" id="distVal">10 km</span>
+      </div>
+      <input type="range" min="1" max="50" value="10" oninput="document.getElementById('distVal').textContent=this.value+' km'">
+      <div class="filter-label" style="margin-bottom:8px;">Personality</div>
+      <div class="filter-chips" id="filterChips">
+        <div class="filter-chip active" onclick="toggleChip(this)">😴 Calm</div>
+        <div class="filter-chip" onclick="toggleChip(this)">🏃 Playful</div>
+        <div class="filter-chip active" onclick="toggleChip(this)">🤗 Cuddly</div>
+        <div class="filter-chip" onclick="toggleChip(this)">😼 Sassy</div>
+        <div class="filter-chip" onclick="toggleChip(this)">🐾 Active</div>
+        <div class="filter-chip" onclick="toggleChip(this)">🌙 Shy</div>
+      </div>
+    </div>
+
+    <!-- MATCHES -->
+    <div class="sidebar-card">
+      <h3>♡⁀➴♡ Recent Matches</h3>
+      <div class="matches-grid" id="matchesGrid">
+        <div class="match-bubble">
+          <div class="match-avatar" style="background:#FDE8EF;border-color:#F4729A;">🐱<span class="match-new-badge">!</span></div>
+          <span class="match-name">Mochi</span>
+        </div>
+        <div class="match-bubble">
+          <div class="match-avatar" style="background:#A8E4F5;border-color:#6BBCD4;">🐈‍⬛</div>
+          <span class="match-name">Shadow</span>
+        </div>
+        <div class="match-bubble">
+          <div class="match-avatar" style="background:#F5EFA6;border-color:#D4B800;">🐾<span class="match-new-badge">!</span></div>
+          <span class="match-name">Biscuit</span>
+        </div>
+        <div class="match-bubble">
+          <div class="match-avatar" style="background:#C9B8F5;border-color:#8B5CF6;">😺</div>
+          <span class="match-name">Luna</span>
+        </div>
+        <div class="match-bubble">
+          <div class="match-avatar" style="background:#A8EDCC;border-color:#2ecc71;">🙀</div>
+          <span class="match-name">Pistachio</span>
+        </div>
+        <div class="match-bubble">
+          <div class="match-avatar" style="background:#FFCBA4;border-color:#FF8C7A;">🐈</div>
+          <span class="match-name">Noodle</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHELTERS -->
+    <div class="sidebar-card">
+      <h3>📍 Nearby Shelters</h3>
+      <div class="shelter-item">
+        <div class="shelter-icon" style="background:#FDE8EF;">🏠</div>
+        <div class="shelter-info">
+          <div class="shelter-name">Baguio Cat Rescue</div>
+          <div class="shelter-dist">⭐ 4.9 • 1.2 km away</div>
+        </div>
+        <span class="shelter-count">23 cats</span>
+      </div>
+      <div class="shelter-item">
+        <div class="shelter-icon" style="background:#A8E4F5;">🐾</div>
+        <div class="shelter-info">
+          <div class="shelter-name">PAWS Benguet</div>
+          <div class="shelter-dist">⭐ 4.7 • 3.5 km away</div>
+        </div>
+        <span class="shelter-count">41 cats</span>
+      </div>
+      <div class="shelter-item">
+        <div class="shelter-icon" style="background:#F5EFA6;">🌸</div>
+        <div class="shelter-info">
+          <div class="shelter-name">Happy Paws Shelter</div>
+          <div class="shelter-dist">⭐ 4.8 • 6.1 km away</div>
+        </div>
+        <span class="shelter-count">17 cats</span>
+      </div>
+    </div>
+
+    <!-- TIP -->
+    <div class="sidebar-card" style="background: linear-gradient(135deg, var(--cream), var(--soft-pink)); border-color: var(--cream);">
+      <h3 style="color: #b8860b;">💡 Adoption Tip</h3>
+      <p style="font-size:13px;color:#7a6a00;font-weight:600;line-height:1.6;">Senior cats (7+ yrs) are often overlooked but make wonderful, calm companions! They're usually already trained and love to cuddle. 🐾</p>
+    </div>
+  </div>
+</main>
+
+<script>
+const cats = [
+  { name:'Mochi', age:'2 yrs', breed:'⚲ Baguio City • Scottish Fold Mix', bg:'linear-gradient(135deg,#A8E4F5,#C9B8F5)', emoji:'🐱', bio:"Hi! I'm Mochi, a cuddle expert and professional nap companion. I love belly rubs and watching birds from the window. Will you be my forever human? 🐾", traits:[['Cuddly','pink'],['Shy','lavender'],['Indoor','blue'],['Vaccinated','mint']] },
+  { name:'Shadow', age:'3 yrs', breed:'⚲ La Trinidad • Domestic Shorthair', bg:'linear-gradient(135deg,#C9B8F5,#FAC0D2)', emoji:'🐈‍⬛', bio:"I'm Shadow — mysterious by name, but a total sweetheart once I trust you. I'll be your loyal shadow forever. 🖤", traits:[['Playful','lavender'],['Active','pink'],['Vaccinated','mint'],['House-trained','blue']] },
+  { name:'Biscuit', age:'1 yr', breed:'⚲ Baguio City • Tabby Mix', bg:'linear-gradient(135deg,#F5EFA6,#FFCBA4)', emoji:'🐈', bio:"Biscuit is ALWAYS making biscuits on blankets and tummies. Soft, warm, and absolutely irresistible. 🍪", traits:[['Cuddly','pink'],['Playful','yellow'],['Kitten energy','peach'],['Vaccinated','mint']] },
+  { name:'Luna', age:'5 yrs', breed:'⚲ Itogon • Ragdoll Mix', bg:'linear-gradient(135deg,#C9B8F5,#A8E4F5)', emoji:'😺', bio:"Luna is a dignified queen looking for a cozy kingdom. She loves classical music, window perches, and exactly 3 head scratches at a time. 👑", traits:[['Calm','lavender'],['Indoor','blue'],['Senior friendly','mint'],['Vaccinated','mint']] },
+  { name:'Pistachio', age:'8 months', breed:'⚲ Camp John Hay • Mixed Breed', bg:'linear-gradient(135deg,#A8EDCC,#A8E4F5)', emoji:'🙀', bio:"Pistachio is a tiny tornado of joy! He zooms at 3am, talks A LOT, and will absolutely steal your heart and your seat. ⚡", traits:[['Zoomies','mint'],['Vocal','blue'],['Kitten energy','yellow'],['Playful','pink']] },
+  { name:'Noodle', age:'4 yrs', breed:'⚲ Baguio City • Siamese Mix', bg:'linear-gradient(135deg,#FFCBA4,#FAC0D2)', emoji:'🐾', bio:"Noodle is long, lanky, and absolutely smitten with you. She greets everyone at the door and thinks she's a dog. 🍜", traits:[['Social','peach'],['Dog-friendly','blue'],['House-trained','mint'],['Vaccinated','mint']] },
+  { name:'Dumpling', age:'6 yrs', breed:'⚲ SLU Area • Persian Mix', bg:'linear-gradient(135deg,#FAC0D2,#F5EFA6)', emoji:'😸', bio:"Dumpling is squishy, fluffy, and snores like a little engine. She requires regular grooming and maximum snuggles. 🥟", traits:[['Cuddly','pink'],['Calm','lavender'],['Senior friendly','mint'],['Vaccinated','mint']] },
+  { name:'Wasabi', age:'2 yrs', breed:'⚲ Baguio City • Orange Tabby', bg:'linear-gradient(135deg,#FFCBA4,#A8EDCC)', emoji:'🐱', bio:"Don't let the name fool you — Wasabi is 100% sweet. He loves chin scratches, tuna treats, and knocking things off tables. 🔶", traits:[['Mischievous','yellow'],['Cuddly','pink'],['Active','peach'],['Vaccinated','mint']] },
+];
+
+let currentIndex = 0;
+let isDragging = false;
+let startX = 0, startY = 0, currentX = 0;
+let history = [];
+
+function loadCard(index) {
+  if (index >= cats.length) {
+    document.getElementById('frontCard').style.display = 'none';
+    document.getElementById('noMoreCats').classList.add('show');
+    return;
+  }
+  const cat = cats[index];
+  const frontCard = document.getElementById('frontCard');
+  frontCard.style.display = '';
+  document.getElementById('noMoreCats').classList.remove('show');
+  frontCard.className = 'cat-card front-card';
+  document.getElementById('cardImg').style.background = cat.bg;
+  document.getElementById('cardImg').textContent = cat.emoji;
+  document.getElementById('cardName').textContent = cat.name;
+  document.getElementById('cardAge').textContent = cat.age;
+  document.getElementById('cardBreed').textContent = cat.breed;
+  document.getElementById('cardBio').textContent = cat.bio;
+  const traitsEl = document.getElementById('cardTraits');
+  traitsEl.innerHTML = '';
+  cat.traits.forEach(([t, c]) => {
+    traitsEl.innerHTML += `<span class="trait trait-${c}">${t}</span>`;
+  });
+  // Reset overlays
+  document.getElementById('swipeLike').style.opacity = 0;
+  document.getElementById('swipeNope').style.opacity = 0;
+  frontCard.style.transform = '';
+  frontCard.style.opacity = '';
+}
+
+function swipeRight() {
+  const cat = cats[currentIndex];
+  const frontCard = document.getElementById('frontCard');
+  frontCard.classList.add('swiping-right');
+  history.push(currentIndex);
+  setTimeout(() => {
+    currentIndex++;
+    loadCard(currentIndex);
+    spawnHearts();
+    if (Math.random() > 0.5) setTimeout(() => showMatchPopup(cat.name), 600);
+  }, 450);
+}
+function swipeLeft() {
+  const frontCard = document.getElementById('frontCard');
+  frontCard.classList.add('swiping-left');
+  history.push(currentIndex);
+  setTimeout(() => { currentIndex++; loadCard(currentIndex); }, 450);
+}
+function superLike() {
+  const cat = cats[currentIndex];
+  document.getElementById('swipeLike').textContent = 'SUPER! ⭐';
+  document.getElementById('swipeLike').style.opacity = 1;
+  swipeRight();
+}
+function boostCard() {
+  const card = document.getElementById('frontCard');
+  card.style.boxShadow = '0 0 0 6px #C9B8F5, 0 12px 40px rgba(201,184,245,0.6)';
+  setTimeout(() => card.style.boxShadow = '', 1000);
+}
+function undoSwipe() {
+  if (history.length === 0) return;
+  currentIndex = history.pop();
+  loadCard(currentIndex);
+}
+function resetCats() {
+  currentIndex = 0;
+  history = [];
+  loadCard(0);
+}
+function toggleChip(el) { el.classList.toggle('active'); }
+
+// DRAG-TO-SWIPE
+const frontCard = document.getElementById('frontCard');
+frontCard.addEventListener('mousedown', startDrag);
+frontCard.addEventListener('touchstart', e => startDrag(e.touches[0]), { passive: true });
+document.addEventListener('mousemove', drag);
+document.addEventListener('touchmove', e => drag(e.touches[0]), { passive: true });
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchend', endDrag);
+
+function startDrag(e) {
+  isDragging = true; startX = e.clientX; startY = e.clientY; currentX = 0;
+}
+function drag(e) {
+  if (!isDragging) return;
+  const card = document.getElementById('frontCard');
+  currentX = e.clientX - startX;
+  const currentY = e.clientY - startY;
+  const rotation = currentX * 0.07;
+  card.style.transform = `translate(${currentX}px, ${currentY * 0.3}px) rotate(${rotation}deg)`;
+  const likeOpacity = Math.max(0, currentX / 80);
+  const nopeOpacity = Math.max(0, -currentX / 80);
+  document.getElementById('swipeLike').style.opacity = Math.min(1, likeOpacity);
+  document.getElementById('swipeNope').style.opacity = Math.min(1, nopeOpacity);
+}
+function endDrag() {
+  if (!isDragging) return;
+  isDragging = false;
+  if (currentX > 80) swipeRight();
+  else if (currentX < -80) swipeLeft();
+  else {
+    const card = document.getElementById('frontCard');
+    card.style.transition = 'transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275)';
+    card.style.transform = '';
+    document.getElementById('swipeLike').style.opacity = 0;
+    document.getElementById('swipeNope').style.opacity = 0;
+    setTimeout(() => card.style.transition = '', 400);
+  }
+}
+
+function showMatchPopup(name) {
+  document.getElementById('matchPopupText').textContent = `You and ${name} could be a perfect pair! Ready to meet them? 🐾`;
+  document.getElementById('matchPopup').classList.add('show');
+  spawnHearts();
+}
+function closePopup() { document.getElementById('matchPopup').classList.remove('show'); }
+
+function spawnHearts() {
+  const emojis = ['❤️','💕','🐾','✨','💖','🌸','💝'];
+  const container = document.getElementById('heartsContainer');
+  for (let i = 0; i < 14; i++) {
+    setTimeout(() => {
+      const h = document.createElement('span');
+      h.className = 'falling-heart';
+      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+      h.style.fontSize = (14 + Math.random() * 16) + 'px';
+      container.appendChild(h);
+      setTimeout(() => h.remove(), 1600);
+    }, i * 80);
+  }
+}
+
+// PAW TRAIL on cursor
+document.addEventListener('mousemove', (e) => {
+  if (Math.random() > 0.97) {
+    const p = document.createElement('span');
+    p.className = 'paw-trail';
+    p.textContent = '🐾';
+    p.style.left = e.clientX + 'px';
+    p.style.top = e.clientY + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+  }
+});
+
+// KEYBOARD SHORTCUTS
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') swipeRight();
+  else if (e.key === 'ArrowLeft') swipeLeft();
+  else if (e.key === 'ArrowUp') superLike();
+});
+
+// Initial load
+loadCard(0);
+</script>
+</body>
+</html>
